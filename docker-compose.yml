@@ -1,0 +1,11 @@
+services:
+  postgres:
+    image: postgres:lastest
+    container_name: BankProject
+    environment:
+      POSTGRES_DB:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+    ports:
+      - "5431:5432"
+    restart: always
