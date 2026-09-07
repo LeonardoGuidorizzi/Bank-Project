@@ -19,3 +19,4 @@ public class CustomerFactory {
         return new Customer(18, "123.456.789-00", "Name", income, "SP" );
     }
 }
+//it's a way to understand junit
