@@ -1,5 +1,8 @@
 package dev.dreamer.bank.domain;
 
+import dev.dreamer.bank.domain.enums.AccountStatus;
+import dev.dreamer.bank.domain.enums.AccountType;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
