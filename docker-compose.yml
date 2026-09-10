@@ -1,6 +1,6 @@
 services:
   postgres:
-    image: postgres:lastest
+    image: postgres:latest
     container_name: BankProject
     environment:
       POSTGRES_DB: ${DB_NAME}
