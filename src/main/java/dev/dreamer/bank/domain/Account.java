@@ -15,6 +15,15 @@ public class Account {
     BigDecimal balance;
     AccountType accountType;
     AccountStatus status;
+
     LocalDateTime creationDate;
+
+    private Account() {
+    }
+
+    public static Account create(UUID id, String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountStatus) {
+        return null;
+    }
+
 
 }
