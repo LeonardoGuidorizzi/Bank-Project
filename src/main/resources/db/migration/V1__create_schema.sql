@@ -5,6 +5,7 @@ CREATE TABLE users (
                        password_hash   VARCHAR(255) NOT NULL,
                        role            VARCHAR(20)  NOT NULL DEFAULT 'CUSTOMER',
                        created_at      TIMESTAMP    NOT NULL DEFAULT now(),
+                       updated_at      TIMESTAMP      NOT NULL DEFAULT now(),
 
                        CONSTRAINT chk_users_role CHECK (role IN ('CUSTOMER', 'ADMIN'))
 );
@@ -17,6 +18,7 @@ CREATE TABLE accounts (
                           account_type    VARCHAR(20)    NOT NULL DEFAULT 'CHECKING',
                           status          VARCHAR(20)    NOT NULL DEFAULT 'ACTIVE',
                           created_at      TIMESTAMP      NOT NULL DEFAULT now(),
+                          updated_at      TIMESTAMP      NOT NULL DEFAULT now(),
 
                           CONSTRAINT chk_accounts_balance_non_negative CHECK (balance >= 0),
                           CONSTRAINT chk_accounts_type CHECK (account_type IN ('CHECKING', 'SAVINGS')),
