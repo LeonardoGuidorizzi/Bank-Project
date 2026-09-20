@@ -18,8 +18,6 @@ public class Account {
     AccountStatus status;
     LocalDateTime creationDate;
 
-    private Account() {
-    }
 
     private Account(UUID id, String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountstatus, LocalDateTime creationDate) {
         validate(accountNumber, userId, balance, accountType, accountstatus, creationDate);
@@ -32,14 +30,13 @@ public class Account {
         this.creationDate = creationDate;
     }
 
-    public static Account create(String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountStatus, LocalDateTime creationDate ) {
-        Account account = new Account();
-        account.accountNumber = accountNumber;
-        account.userId = userId;
-        account.balance = BigDecimal.ZERO;
-        account.accountType = accountType;
-        account.status = AccountStatus.ACTIVE;
-       return account;
+    public static Account create(UUID userId, AccountType accountType) {
+      UUID id = UUID.randomUUID();
+      String accountNumber = generateAccountNumber();
+      BigDecimal balance = BigDecimal.ZERO;
+      AccountStatus status = AccountStatus.ACTIVE;
+      LocalDateTime creationDate = LocalDateTime.now();
+       return new Account(id, accountNumber, userId, balance, accountType, status, creationDate);
     }
 
     public static Account restore(UUID id, String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountStatus, LocalDateTime creationDate){
