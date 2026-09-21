@@ -7,6 +7,7 @@ import dev.dreamer.bank.domain.exceptions.InvalidAccountDataException;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Account {
 
@@ -39,10 +40,35 @@ public class Account {
        return new Account(id, accountNumber, userId, balance, accountType, status, creationDate);
     }
 
+
+
     public static Account restore(UUID id, String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountStatus, LocalDateTime creationDate){
 
         return new Account(id, accountNumber, userId, balance, accountType, accountStatus, creationDate);
     }
+
+    private static String generateAccountNumber() {
+        int numbers = ThreadLocalRandom.current().nextInt(10000, 100000);
+        String accountNumber = String.valueOf(numbers);
+        int sum = 0;
+        boolean alternate = true;
+        for (int i  = accountNumber.length()-1;  i >= 0; i--) { // -> se tiver 6 ele vai começar do 5
+            int digit = accountNumber.charAt(i) - '0'; // -> converte para inteiro
+            if (alternate){
+                digit *= 2; // digit = digit * 2;
+            }
+            if(digit > 9){
+                digit -=9;
+            }
+            sum += digit;
+            alternate = !alternate;
+
+        }
+        int checkNumber = (10 - (sum % 10)) %10; // se for 43 o resto vai ser 3 e esse 3 vai subtrair o 10
+        return   accountNumber + checkNumber;
+    }
+
+    //todo: withdraw and deposit method
 
 
     private static void validate(String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountStatus,   LocalDateTime creationDate  ) {
