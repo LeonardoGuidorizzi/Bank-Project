@@ -92,8 +92,11 @@ public class Account {
 
 
     private static void validate(String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountStatus,   LocalDateTime creationDate  ) {
-        if (accountNumber == null|| accountNumber.isBlank()){
+        if (accountNumber == null){
             throw new InvalidAccountDataException("Account number cannot be null or empty");
+        }
+        if (accountNumber.isBlank()){
+            throw new InvalidAccountDataException("Account number cannot be empty");
         }
         if (accountType == null){
             throw new InvalidAccountDataException("Account type cannot be null");
