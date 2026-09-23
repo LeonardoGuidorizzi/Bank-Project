@@ -136,7 +136,25 @@ public class AccountTest {
             //Assert
             assertEquals(amount, account.getBalance());
         }
-
+        @Test
+        void shouldDoDepositWithBalanceAlready() {
+            //Arrange
+            UUID userId = UUID.randomUUID();
+            AccountType accountType = AccountType.SAVINGS;
+            BigDecimal amount = new BigDecimal(500);
+            Account account = Account.restore(
+                    UUID.randomUUID(),
+                    "515817",
+                    UUID.randomUUID(),
+                    new BigDecimal(1000),
+                    AccountType.CHECKING,
+                    AccountStatus.ACTIVE,
+                    LocalDateTime.now());
+            //Act
+            account.deposit(amount);
+            //Assert
+            assertEquals(new BigDecimal(1500), account.getBalance());
+        }
     }
 
     @Test
