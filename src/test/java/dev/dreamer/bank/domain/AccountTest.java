@@ -157,7 +157,7 @@ public class AccountTest {
         }
 
         @Test()
-        void shouldThrowExceptionWhenAmountIsNegative() {
+        void shouldThrowExceptionWhenAmountIsNegativeOnDeposit() {
             Account account = Account.restore(
                     UUID.randomUUID(),
                     "515817",
@@ -172,7 +172,7 @@ public class AccountTest {
         }
 
         @Test()
-        void shouldThrowExceptionWhenAmountIsZero() {
+        void shouldThrowExceptionWhenAmountIsZeroOnDeposit() {
             Account account = Account.restore(
                     UUID.randomUUID(),
                     "515817",
@@ -207,7 +207,7 @@ public class AccountTest {
         }
 
         @Test
-        void shouldThrowExceptionWhenAmountIsNegative() {
+        void shouldThrowExceptionWhenAmountIsNegativeOnWithdraw() {
             //Arrange
             BigDecimal amount = new BigDecimal(-100);
             Account account = Account.restore(
@@ -224,7 +224,26 @@ public class AccountTest {
                 account.withdraw(amount);
             });
     }}
-}}
+
+        @Test
+        void shouldThrowExceptionWhenAmountIsZeroOnWithdraw() {
+            //Arrange
+            BigDecimal amount = new BigDecimal(-100);
+            Account account = Account.restore(
+                    UUID.randomUUID(),
+                    "515817",
+                    UUID.randomUUID(),
+                    new BigDecimal(1000),
+                    AccountType.CHECKING,
+                    AccountStatus.ACTIVE,
+                    LocalDateTime.now());
+
+            //Act
+            assertThrows(InvalidAmountException.class,()->{
+                account.withdraw(amount);
+            });
+        }}
+}
 /*
 *
 assertEquals(esperado, obtido) — quando você sabe exatamente qual valor deveria sair (status, saldo, userId passado)
