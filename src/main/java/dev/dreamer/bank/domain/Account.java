@@ -2,7 +2,9 @@ package dev.dreamer.bank.domain;
 
 import dev.dreamer.bank.domain.enums.AccountStatus;
 import dev.dreamer.bank.domain.enums.AccountType;
-import dev.dreamer.bank.domain.exceptions.InvalidAccountDataException;
+import dev.dreamer.bank.domain.exceptions.account.InsufficientFundsException;
+import dev.dreamer.bank.domain.exceptions.account.InvalidAccountDataException;
+import dev.dreamer.bank.domain.exceptions.account.InvalidAmountException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -68,7 +70,25 @@ public class Account {
         return   accountNumber + checkNumber;
     }
 
-    //todo: withdraw and deposit method
+
+    public void deposit(BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new InvalidAmountException("Amount cannot be negative or zero");
+        }
+        this.balance = this.balance.add(amount);
+    }
+
+    public void withdraw(BigDecimal amount) {
+        if(amount.compareTo(BigDecimal.ZERO) <= 0){
+            throw new InvalidAmountException("Amount cannot be negative or zero");
+        }
+        boolean isBalanceInsufficient = balance.compareTo(amount) < 0;
+
+        if (isBalanceInsufficient) {
+            throw new InsufficientFundsException("Insufficient funds");
+        }
+        this.balance = this.balance.subtract(amount);
+    }
 
 
     private static void validate(String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountStatus,   LocalDateTime creationDate  ) {
