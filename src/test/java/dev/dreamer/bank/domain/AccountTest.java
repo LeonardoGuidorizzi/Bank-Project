@@ -3,6 +3,7 @@ package dev.dreamer.bank.domain;
 import dev.dreamer.bank.domain.enums.AccountStatus;
 import dev.dreamer.bank.domain.enums.AccountType;
 import dev.dreamer.bank.domain.exceptions.account.InvalidAccountDataException;
+import dev.dreamer.bank.domain.exceptions.account.InvalidAmountException;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -155,6 +156,23 @@ public class AccountTest {
             //Assert
             assertEquals(new BigDecimal(1500), account.getBalance());
         }
+
+        @Test()
+        void shouldThrowExceptionWhenAmountIsNegative() {
+            Account account = Account.restore(
+                    UUID.randomUUID(),
+                    "515817",
+                    UUID.randomUUID(),
+                    new BigDecimal(1000),
+                    AccountType.CHECKING,
+                    AccountStatus.ACTIVE,
+                    LocalDateTime.now());
+            assertThrows(InvalidAmountException.class,()->{
+                account.deposit(BigDecimal.valueOf(-1));
+            });
+        }
+
+
     }
 
     @Test
