@@ -104,6 +104,18 @@ public class AccountTest {
                         LocalDateTime.now());
             } );
         }
+        @Test()
+        void shouldThrowExceptionWhenAccountCreationDateIsNull() {
+            assertThrows(InvalidAccountDataException.class,()->{
+                Account.restore(UUID.randomUUID(),
+                        "515817",
+                        UUID.randomUUID(),
+                        new BigDecimal(1000),
+                        AccountType.CHECKING,
+                        AccountStatus.ACTIVE,
+                        null);
+            } );
+        }
     }
 
     @Test
