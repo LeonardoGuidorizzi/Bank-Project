@@ -140,8 +140,7 @@ public class AccountTest {
         @Test
         void shouldDoDepositWithBalanceAlready() {
             //Arrange
-            UUID userId = UUID.randomUUID();
-            AccountType accountType = AccountType.SAVINGS;
+
             BigDecimal amount = new BigDecimal(500);
             Account account = Account.restore(
                     UUID.randomUUID(),
