@@ -122,8 +122,21 @@ public class AccountTest {
     void restore() {
     }
 
-    @Test
-    void deposit() {
+    @Nested
+    class deposit {
+        @Test()
+        void shouldDoDeposit() {
+            //Arrange
+            UUID userId = UUID.randomUUID();
+            AccountType accountType = AccountType.SAVINGS;
+            Account account = Account.create(userId, accountType);
+            BigDecimal amount = new BigDecimal(100);
+            //Act
+            account.deposit(amount);
+            //Assert
+            assertEquals(amount, account.getBalance());
+        }
+
     }
 
     @Test
