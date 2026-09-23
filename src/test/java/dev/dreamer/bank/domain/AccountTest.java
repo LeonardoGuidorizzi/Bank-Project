@@ -172,13 +172,25 @@ public class AccountTest {
             });
         }
 
-
+        @Test()
+        void shouldThrowExceptionWhenAmountIsZero() {
+            Account account = Account.restore(
+                    UUID.randomUUID(),
+                    "515817",
+                    UUID.randomUUID(),
+                    new BigDecimal(1000),
+                    AccountType.CHECKING,
+                    AccountStatus.ACTIVE,
+                    LocalDateTime.now());
+            assertThrows(InvalidAmountException.class,()->{
+                account.deposit(BigDecimal.ZERO);
+            });
     }
 
     @Test
     void withdraw() {
     }
-}
+}}
 /*
 *
 assertEquals(esperado, obtido) — quando você sabe exatamente qual valor deveria sair (status, saldo, userId passado)
