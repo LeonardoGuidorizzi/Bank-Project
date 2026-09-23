@@ -228,7 +228,7 @@ public class AccountTest {
         @Test
         void shouldThrowExceptionWhenAmountIsZeroOnWithdraw() {
             //Arrange
-            BigDecimal amount = new BigDecimal(-100);
+            BigDecimal amount = BigDecimal.ZERO;
             Account account = Account.restore(
                     UUID.randomUUID(),
                     "515817",
