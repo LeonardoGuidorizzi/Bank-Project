@@ -186,8 +186,25 @@ public class AccountTest {
             });
     }
 
-    @Test
-    void withdraw() {
+    @Nested
+    class withdraw {
+        @Test
+        void shouldDoWithdraw() {
+            //Arrange
+            BigDecimal amount = new BigDecimal(100);
+            Account account = Account.restore(
+                    UUID.randomUUID(),
+                    "515817",
+                    UUID.randomUUID(),
+                    new BigDecimal(1000),
+                    AccountType.CHECKING,
+                    AccountStatus.ACTIVE,
+                    LocalDateTime.now());
+            //Act
+            account.withdraw(amount);
+            //Assert
+            assertEquals(new BigDecimal(900), account.getBalance());
+        }
     }
 }}
 /*
