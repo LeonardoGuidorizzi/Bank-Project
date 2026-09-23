@@ -119,8 +119,30 @@ public class AccountTest {
         }
     }
 
-    @Test
-    void restore() {
+    @Nested
+    class restore {
+        @Test()
+        void shouldCreateRestoreBeConsist() {
+            //Arrange
+            UUID id = UUID.randomUUID();
+            String accountNumber = "515817";
+            UUID userId = UUID.randomUUID();
+            BigDecimal balance = BigDecimal.ZERO;
+            AccountType accountType = AccountType.CHECKING;
+            AccountStatus accountStatus = AccountStatus.ACTIVE;
+            LocalDateTime creationDate = LocalDateTime.now();
+            //Act
+            Account account = Account.restore(id, accountNumber, userId, balance, accountType, accountStatus, creationDate);
+            //Assert
+            assertEquals(id, account.getId());
+            assertEquals(accountNumber, account.getAccountNumber());
+            assertEquals(userId, account.getUserId());
+            assertEquals(balance, account.getBalance());
+            assertEquals(accountType, account.getAccountType());
+            assertEquals(accountStatus, account.getStatus());
+            assertEquals(creationDate, account.getCreationDate());
+
+        }
     }
 
     @Nested
@@ -204,6 +226,23 @@ public class AccountTest {
             account.withdraw(amount);
             //Assert
             assertEquals(new BigDecimal(900), account.getBalance());
+        }
+        @Test
+        void shouldWipeOutTheBalance() {
+            //Arrange
+            BigDecimal amount = new BigDecimal(100);
+            Account account = Account.restore(
+                    UUID.randomUUID(),
+                    "515817",
+                    UUID.randomUUID(),
+                    new BigDecimal(100),
+                    AccountType.CHECKING,
+                    AccountStatus.ACTIVE,
+                    LocalDateTime.now());
+            //Act
+            account.withdraw(amount);
+            //Assert
+            assertEquals(new BigDecimal(0), account.getBalance());
         }
 
         @Test
