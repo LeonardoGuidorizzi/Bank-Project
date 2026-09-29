@@ -34,40 +34,43 @@ public class Account {
     }
 
     public static Account create(UUID userId, AccountType accountType) {
-      UUID id = UUID.randomUUID();
-      String accountNumber = generateAccountNumber();
-      BigDecimal balance = BigDecimal.ZERO;
-      AccountStatus status = AccountStatus.ACTIVE;
-      LocalDateTime creationDate = LocalDateTime.now();
-       return new Account(id, accountNumber, userId, balance, accountType, status, creationDate);
+        UUID id = UUID.randomUUID();
+        String accountNumber = generateAccountNumber();
+        BigDecimal balance = BigDecimal.ZERO;
+        AccountStatus status = AccountStatus.ACTIVE;
+        LocalDateTime creationDate = LocalDateTime.now();
+        return new Account(id, accountNumber, userId, balance, accountType, status, creationDate);
     }
 
 
-
-    public static Account restore(UUID id, String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountStatus, LocalDateTime creationDate){
+    public static Account restore(UUID id, String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountStatus, LocalDateTime creationDate) {
 
         return new Account(id, accountNumber, userId, balance, accountType, accountStatus, creationDate);
     }
 
+    /*
+     * todo:
+     *  - fazer a validação depois pra não gerar números de conta repetidos.
+     *   -seria bom transformar essa geração de números em um serviço pra poder validar se o número gerado existe ou não no banco e aí sim passar pra entidade.*/
     private static String generateAccountNumber() {
         int numbers = ThreadLocalRandom.current().nextInt(10000, 100000);
         String accountNumber = String.valueOf(numbers);
         int sum = 0;
         boolean alternate = true;
-        for (int i  = accountNumber.length()-1;  i >= 0; i--) { // -> se tiver 6 ele vai começar do 5
+        for (int i = accountNumber.length() - 1; i >= 0; i--) { // -> se tiver 6 ele vai começar do 5
             int digit = accountNumber.charAt(i) - '0'; // -> converte para inteiro
-            if (alternate){
+            if (alternate) {
                 digit *= 2; // digit = digit * 2;
             }
-            if(digit > 9){
-                digit -=9;
+            if (digit > 9) {
+                digit -= 9;
             }
             sum += digit;
             alternate = !alternate;
 
         }
-        int checkNumber = (10 - (sum % 10)) %10; // se for 43 o resto vai ser 3 e esse 3 vai subtrair o 10
-        return   accountNumber + checkNumber;
+        int checkNumber = (10 - (sum % 10)) % 10; // se for 43 o resto vai ser 3 e esse 3 vai subtrair o 10
+        return accountNumber + checkNumber;
     }
 
 
@@ -79,7 +82,7 @@ public class Account {
     }
 
     public void withdraw(BigDecimal amount) {
-        if(amount.compareTo(BigDecimal.ZERO) <= 0){
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
             throw new InvalidAmountException("Amount cannot be negative or zero");
         }
         boolean isBalanceInsufficient = balance.compareTo(amount) < 0;
@@ -91,35 +94,34 @@ public class Account {
     }
 
 
-    private static void validate(String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountStatus,   LocalDateTime creationDate  ) {
-        if (accountNumber == null){
+    private static void validate(String accountNumber, UUID userId, BigDecimal balance, AccountType accountType, AccountStatus accountStatus, LocalDateTime creationDate) {
+        if (accountNumber == null) {
             throw new InvalidAccountDataException("Account number cannot be null or empty");
         }
-        if (accountNumber.isBlank()){
+        if (accountNumber.isBlank()) {
             throw new InvalidAccountDataException("Account number cannot be empty");
         }
-        if (accountType == null){
+        if (accountType == null) {
             throw new InvalidAccountDataException("Account type cannot be null");
         }
-        if (userId == null){
+        if (userId == null) {
             throw new InvalidAccountDataException("Account user cannot be null");
         }
-        if (balance == null){
+        if (balance == null) {
             throw new InvalidAccountDataException("Balance cannot be null");
         }
-        if (balance.compareTo(BigDecimal.ZERO) < 0){
+        if (balance.compareTo(BigDecimal.ZERO) < 0) {
             throw new InvalidAccountDataException("Balance cannot be less than zero");
         }
-        if (accountStatus == null){
+        if (accountStatus == null) {
             throw new InvalidAccountDataException("Account status cannot be null");
         }
-        if (creationDate == null){
+        if (creationDate == null) {
             throw new InvalidAccountDataException("Account creation date cannot be null");
         }
 
 
     }
-
 
 
     public UUID getId() {
