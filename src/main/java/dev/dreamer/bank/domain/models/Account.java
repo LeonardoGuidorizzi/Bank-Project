@@ -1,4 +1,4 @@
-package dev.dreamer.bank.domain;
+package dev.dreamer.bank.domain.models;
 
 import dev.dreamer.bank.domain.enums.AccountStatus;
 import dev.dreamer.bank.domain.enums.AccountType;
