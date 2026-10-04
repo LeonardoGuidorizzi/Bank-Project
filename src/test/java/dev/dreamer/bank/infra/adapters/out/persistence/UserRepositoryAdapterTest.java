@@ -1,6 +1,7 @@
 package dev.dreamer.bank.infra.adapters.out.persistence;
 
 import dev.dreamer.bank.TestcontainersConfiguration;
+import dev.dreamer.bank.domain.enums.UserRole;
 import dev.dreamer.bank.domain.models.User;
 import dev.dreamer.bank.domain.ports.out.UserRepositoryPort;
 import org.junit.jupiter.api.DisplayName;
@@ -77,5 +78,26 @@ class UserRepositoryAdapterTest {
 
         Optional<User> notFound = userRepository.findById("00000000-0000-0000-0000-000000000000");
         assertTrue(notFound.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Should persist default CUSTOMER role and keep an explicit role")
+    void shouldPersistRole() {
+        User customer = userRepository.save(new User(null, "customer", "customer@example.com", "hash"));
+        User admin = userRepository.save(new User(null, "admin", "admin@example.com", "hash", UserRole.ADMIN));
+
+        assertEquals(UserRole.CUSTOMER, userRepository.findById(customer.getId()).orElseThrow().getRole());
+        assertEquals(UserRole.ADMIN, userRepository.findById(admin.getId()).orElseThrow().getRole());
+    }
+
+    @Test
+    @DisplayName("Should check and find users by username")
+    void shouldCheckAndFindByUsername() {
+        userRepository.save(new User(null, "carol", "carol@example.com", "hash"));
+
+        assertTrue(userRepository.existsByUsername("carol"));
+        assertFalse(userRepository.existsByUsername("nobody"));
+        assertEquals("carol@example.com", userRepository.findByUsername("carol").orElseThrow().getEmail());
+        assertTrue(userRepository.findByUsername("nobody").isEmpty());
     }
 }

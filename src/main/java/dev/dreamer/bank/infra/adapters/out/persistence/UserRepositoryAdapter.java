@@ -1,5 +1,6 @@
 package dev.dreamer.bank.infra.adapters.out.persistence;
 
+import dev.dreamer.bank.domain.enums.UserRole;
 import dev.dreamer.bank.domain.models.User;
 import dev.dreamer.bank.domain.ports.out.UserRepositoryPort;
 import dev.dreamer.bank.infra.adapters.out.persistence.entities.UserJpaEntity;
@@ -24,6 +25,11 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     }
 
     @Override
+    public boolean existsByUsername(String username) {
+        return springDataUserRepository.existsByUsername(username);
+    }
+
+    @Override
     public User save(User user) {
         UserJpaEntity entity = toEntity(user);
         UserJpaEntity savedEntity = springDataUserRepository.save(entity);
@@ -34,6 +40,11 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
     @Override
     public Optional<User> findByEmail(String email) {
         return springDataUserRepository.findByEmail(email).map(this::toDomain);
+    }
+
+    @Override
+    public Optional<User> findByUsername(String username) {
+        return springDataUserRepository.findByUsername(username).map(this::toDomain);
     }
 
     @Override
@@ -51,13 +62,14 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
 
     private UserJpaEntity toEntity(User user) {
         UUID id = user.getId() != null && !user.getId().isBlank() ? UUID.fromString(user.getId()) : null;
+        UserRole role = user.getRole() != null ? user.getRole() : User.DEFAULT_ROLE;
 
         return new UserJpaEntity(
                 id,
-                user.getName(),
+                user.getUsername(),
                 user.getEmail(),
                 user.getPasswordHash(),
-                "CUSTOMER",
+                role.name(),
                 null,
                 null
         );
@@ -68,7 +80,8 @@ public class UserRepositoryAdapter implements UserRepositoryPort {
                 entity.getId() != null ? entity.getId().toString() : null,
                 entity.getUsername(),
                 entity.getEmail(),
-                entity.getPasswordHash()
+                entity.getPasswordHash(),
+                entity.getRole() != null ? UserRole.valueOf(entity.getRole()) : null
         );
     }
 }

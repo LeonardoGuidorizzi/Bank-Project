@@ -49,4 +49,21 @@ class BCryptHashAdapterTest {
 
         assertFalse(matches);
     }
+
+    @Test
+    @DisplayName("Should return false instead of throwing for inputs longer than 72 bytes")
+    void shouldReturnFalseForTooLongInput() {
+        String hashedPassword = hashAdapter.hash("mySecretPassword123");
+
+        assertFalse(hashAdapter.matches("a".repeat(100), hashedPassword));
+    }
+
+    @Test
+    @DisplayName("Should return false for null inputs")
+    void shouldReturnFalseForNullInputs() {
+        String hashedPassword = hashAdapter.hash("mySecretPassword123");
+
+        assertFalse(hashAdapter.matches(null, hashedPassword));
+        assertFalse(hashAdapter.matches("mySecretPassword123", null));
+    }
 }

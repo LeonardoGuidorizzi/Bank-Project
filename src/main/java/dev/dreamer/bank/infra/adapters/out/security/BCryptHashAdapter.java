@@ -19,6 +19,14 @@ public class BCryptHashAdapter implements HashPort {
 
     @Override
     public boolean matches(String rawString, String hashedString) {
-        return encoder.matches(rawString, hashedString);
+        if (rawString == null || hashedString == null) {
+            return false;
+        }
+        try {
+            return encoder.matches(rawString, hashedString);
+        } catch (IllegalArgumentException e) {
+            // BCrypt rejects inputs longer than 72 bytes; such a password can never match
+            return false;
+        }
     }
 }
