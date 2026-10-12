@@ -1,10 +1,10 @@
-package dev.dreamer.bank.domain;
+package dev.dreamer.bank.domain.models;
 
 import dev.dreamer.bank.domain.enums.AccountStatus;
 import dev.dreamer.bank.domain.enums.AccountType;
-import dev.dreamer.bank.domain.exceptions.account.InsufficientFundsException;
-import dev.dreamer.bank.domain.exceptions.account.InvalidAccountDataException;
-import dev.dreamer.bank.domain.exceptions.account.InvalidAmountException;
+import dev.dreamer.bank.domain.exceptions.auth.account.InsufficientFundsException;
+import dev.dreamer.bank.domain.exceptions.auth.account.InvalidAccountDataException;
+import dev.dreamer.bank.domain.exceptions.auth.account.InvalidAmountException;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
