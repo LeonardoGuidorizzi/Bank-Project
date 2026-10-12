@@ -1,8 +1,8 @@
 package dev.dreamer.bank.application.services;
 
-import dev.dreamer.bank.domain.exceptions.EmailAlreadyExistsException;
-import dev.dreamer.bank.domain.exceptions.InvalidUserDataException;
-import dev.dreamer.bank.domain.exceptions.UsernameAlreadyExistsException;
+import dev.dreamer.bank.domain.exceptions.auth.EmailAlreadyExistsException;
+import dev.dreamer.bank.domain.exceptions.auth.InvalidUserDataException;
+import dev.dreamer.bank.domain.exceptions.auth.UsernameAlreadyExistsException;
 import dev.dreamer.bank.domain.models.User;
 import dev.dreamer.bank.domain.ports.in.SignUpUseCase;
 import dev.dreamer.bank.domain.ports.out.HashPort;

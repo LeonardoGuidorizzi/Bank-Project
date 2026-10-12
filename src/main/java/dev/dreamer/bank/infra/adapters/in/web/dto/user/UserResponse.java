@@ -1,4 +1,4 @@
-package dev.dreamer.bank.infra.adapters.in.web.dto;
+package dev.dreamer.bank.infra.adapters.in.web.dto.user;
 
 import dev.dreamer.bank.domain.models.User;
 

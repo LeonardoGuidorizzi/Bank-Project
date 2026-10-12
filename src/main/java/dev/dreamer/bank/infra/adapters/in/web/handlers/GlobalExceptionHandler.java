@@ -1,10 +1,10 @@
 package dev.dreamer.bank.infra.adapters.in.web.handlers;
 
-import dev.dreamer.bank.domain.exceptions.EmailAlreadyExistsException;
-import dev.dreamer.bank.domain.exceptions.InvalidCredentialsException;
-import dev.dreamer.bank.domain.exceptions.InvalidUserDataException;
-import dev.dreamer.bank.domain.exceptions.UserNotFoundException;
-import dev.dreamer.bank.domain.exceptions.UsernameAlreadyExistsException;
+import dev.dreamer.bank.domain.exceptions.auth.EmailAlreadyExistsException;
+import dev.dreamer.bank.domain.exceptions.auth.InvalidCredentialsException;
+import dev.dreamer.bank.domain.exceptions.auth.InvalidUserDataException;
+import dev.dreamer.bank.domain.exceptions.auth.UserNotFoundException;
+import dev.dreamer.bank.domain.exceptions.auth.UsernameAlreadyExistsException;
 import dev.dreamer.bank.infra.adapters.in.web.dto.ErrorResponse;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

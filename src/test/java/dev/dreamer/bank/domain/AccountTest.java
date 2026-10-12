@@ -2,8 +2,8 @@ package dev.dreamer.bank.domain;
 
 import dev.dreamer.bank.domain.enums.AccountStatus;
 import dev.dreamer.bank.domain.enums.AccountType;
-import dev.dreamer.bank.domain.exceptions.account.InvalidAccountDataException;
-import dev.dreamer.bank.domain.exceptions.account.InvalidAmountException;
+import dev.dreamer.bank.domain.exceptions.auth.account.InvalidAccountDataException;
+import dev.dreamer.bank.domain.exceptions.auth.account.InvalidAmountException;
 import dev.dreamer.bank.domain.models.Account;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

@@ -1,7 +1,7 @@
-package dev.dreamer.bank.infra.adapters.in.web.controllers;
+package dev.dreamer.bank.infra.adapters.in.web.controllers.user;
 
 import dev.dreamer.bank.domain.ports.in.GetCurrentUserUseCase;
-import dev.dreamer.bank.infra.adapters.in.web.dto.UserResponse;
+import dev.dreamer.bank.infra.adapters.in.web.dto.user.UserResponse;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

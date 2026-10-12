@@ -1,4 +1,4 @@
-package dev.dreamer.bank.domain.exceptions;
+package dev.dreamer.bank.domain.exceptions.auth;
 
 public class UsernameAlreadyExistsException extends RuntimeException {
     public UsernameAlreadyExistsException() {

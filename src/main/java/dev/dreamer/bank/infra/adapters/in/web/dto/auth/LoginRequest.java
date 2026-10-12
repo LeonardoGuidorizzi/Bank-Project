@@ -1,4 +1,4 @@
-package dev.dreamer.bank.infra.adapters.in.web.dto;
+package dev.dreamer.bank.infra.adapters.in.web.dto.auth;
 
 import jakarta.validation.constraints.NotBlank;
 

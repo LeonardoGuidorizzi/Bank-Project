@@ -1,4 +1,4 @@
-package dev.dreamer.bank.infra.adapters.in.web.controllers;
+package dev.dreamer.bank.infra.adapters.in.web.controllers.auth;
 
 import dev.dreamer.bank.domain.models.User;
 import dev.dreamer.bank.domain.ports.in.LoginUseCase;
@@ -6,10 +6,10 @@ import dev.dreamer.bank.domain.ports.in.LoginUseCase.LoginCommand;
 import dev.dreamer.bank.domain.ports.in.LoginUseCase.LoginResult;
 import dev.dreamer.bank.domain.ports.in.SignUpUseCase;
 import dev.dreamer.bank.domain.ports.in.SignUpUseCase.SignUpCommand;
-import dev.dreamer.bank.infra.adapters.in.web.dto.LoginRequest;
-import dev.dreamer.bank.infra.adapters.in.web.dto.LoginResponse;
-import dev.dreamer.bank.infra.adapters.in.web.dto.SignUpRequest;
-import dev.dreamer.bank.infra.adapters.in.web.dto.UserResponse;
+import dev.dreamer.bank.infra.adapters.in.web.dto.auth.LoginRequest;
+import dev.dreamer.bank.infra.adapters.in.web.dto.auth.LoginResponse;
+import dev.dreamer.bank.infra.adapters.in.web.dto.auth.SignUpRequest;
+import dev.dreamer.bank.infra.adapters.in.web.dto.user.UserResponse;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;

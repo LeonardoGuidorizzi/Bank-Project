@@ -1,6 +1,6 @@
 package dev.dreamer.bank.application.services;
 
-import dev.dreamer.bank.domain.exceptions.InvalidCredentialsException;
+import dev.dreamer.bank.domain.exceptions.auth.InvalidCredentialsException;
 import dev.dreamer.bank.domain.models.User;
 import dev.dreamer.bank.domain.ports.in.LoginUseCase.LoginCommand;
 import dev.dreamer.bank.domain.ports.in.LoginUseCase.LoginResult;

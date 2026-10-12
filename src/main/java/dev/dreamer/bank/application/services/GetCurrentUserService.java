@@ -1,6 +1,6 @@
 package dev.dreamer.bank.application.services;
 
-import dev.dreamer.bank.domain.exceptions.UserNotFoundException;
+import dev.dreamer.bank.domain.exceptions.auth.UserNotFoundException;
 import dev.dreamer.bank.domain.models.User;
 import dev.dreamer.bank.domain.ports.in.GetCurrentUserUseCase;
 import dev.dreamer.bank.domain.ports.out.UserRepositoryPort;

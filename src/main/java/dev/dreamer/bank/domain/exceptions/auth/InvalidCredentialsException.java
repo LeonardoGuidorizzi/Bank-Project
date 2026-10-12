@@ -1,4 +1,4 @@
-package dev.dreamer.bank.domain.exceptions;
+package dev.dreamer.bank.domain.exceptions.auth;
 
 public class InvalidCredentialsException extends RuntimeException {
     public static final String MESSAGE = "Credenciais inválidas";
