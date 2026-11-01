@@ -9,3 +9,8 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+
+security:
+  jwt:
+    secret: test-secret-key-for-jwt-signing-must-be-32-bytes-long
+    expiration-millis: 3600000
